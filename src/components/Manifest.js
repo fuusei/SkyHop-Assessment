@@ -11,7 +11,7 @@ import { PiFileTextFill } from "react-icons/pi";
 
 const LinearProgress = styled(MUILinearProgress)(() => ({
   height: 4,
-  width: 450,
+  width: 440,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: "#e5e5e5",
@@ -92,10 +92,10 @@ export default function Manifest() {
               <PiFileTextFill color="#f99d26" fontSize="1.8em" />
             </div>
             <div className="flex flex-row justify-center">
-              <div className="text-skyhop-blue font-semibold mr-1">
-                Drag & Drop Here or
+              <div className="text-skyhop-blue text-lg font-semibold mr-1">
+                Drag & Drop Here Or
               </div>
-              <div className="text-skyhop-blue font-extrabold">Browse</div>
+              <div className="text-skyhop-blue text-lg font-extrabold">Browse</div>
             </div>
           </label>
         </form>

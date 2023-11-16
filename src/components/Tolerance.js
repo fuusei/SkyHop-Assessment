@@ -1,4 +1,6 @@
 import { Switch, styled, FormControlLabel, Divider } from "@mui/material";
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
+import { useState } from "react";
 
 const Toggle = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -9,7 +11,7 @@ const Toggle = styled((props) => (
   "& .MuiSwitch-switchBase": {
     padding: 0,
     margin: 2,
-    transitionDuration: "300ms",
+    transitionDuration: "200ms",
     "&.Mui-checked": {
       transform: "translateX(26px)",
       color: "#fff",
@@ -39,19 +41,32 @@ const Toggle = styled((props) => (
   },
 }));
 export default function Tolerance() {
+  const [state, setState] = useState(true); //toggle state
   return (
     <div className="flex flex-row items-center my-1">
-      <FormControlLabel control={<Toggle defaultChecked sx={{ m: 1 }} />} />
-      <div className="text-skyhop-blue mr-3">Toggle ON</div>
+      <FormControlLabel
+        control={
+          <Toggle
+            onChange={() => setState(!state)}
+            defaultChecked
+            sx={{ m: 1 }}
+          />
+        }
+      />
+      <div className="text-skyhop-blue mr-3">{`Toggle ${
+        state ? "ON" : "OFF"
+      }`}</div>
       <Divider
         orientation="vertical"
         flexItem
         variant="middle"
-        sx={{ backgroundColor: "#cacfdc", width:"2px" }}
+        sx={{ backgroundColor: "#cacfdc", width: "2px" }}
       />
       <div className="flex flex-row">
-        <div className="mx-4">Picture</div>
-        <div className="text-skyhop-blue ">Select Tolerance Level</div>
+        <QueryBuilderIcon sx={{ marginX: 1, fill: "#1c3e6e" }} />
+        <div className="text-skyhop-blue font-semibold">
+          Select Tolerance Level
+        </div>
       </div>
     </div>
   );

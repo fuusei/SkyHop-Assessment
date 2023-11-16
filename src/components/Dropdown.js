@@ -5,7 +5,7 @@ import {
   MenuItem,
   OutlinedInput,
 } from "@mui/material";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 
 export default function Dropdown({
@@ -16,6 +16,7 @@ export default function Dropdown({
   width,
 }) {
   // designed for scalability
+
   const [value, setValue] = useState("");
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -26,7 +27,7 @@ export default function Dropdown({
       <InputLabel
         sx={{
           color: "#1c3e6e",
-          fontSize: "15px",
+          fontSize: "17px",
           fontWeight: fontWeight,
           paddingLeft: "3px",
           "&.MuiInputLabel-root.Mui-focused": {
