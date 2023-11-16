@@ -11,7 +11,7 @@ import { PiFileTextFill } from "react-icons/pi";
 
 const LinearProgress = styled(MUILinearProgress)(() => ({
   height: 4,
-  width: 440,
+  width: 490,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: "#e5e5e5",
@@ -77,7 +77,7 @@ export default function Manifest() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col w-[500px] h-[250px] border-2 border-[#bfbfbf] rounded-lg">
+      <div className="flex flex-col w-[550px] h-[250px] border-2 border-[#bfbfbf] rounded-lg">
         <form
           className="mx-4 mt-4 border-2 border-dashed border-[#bfbfbf] basis-2/3 rounded-lg"
           onDragOver={handleDrag}
@@ -125,7 +125,7 @@ export default function Manifest() {
         </div>
       </div>
       <div className="flex flex-col">
-        <Divider flexItem sx={{ marginY: 2, width: 500 }} />
+        <Divider flexItem sx={{ marginY: 2, width: 550 }} />
         <div className="flex flex-row w-full items-center">
           <TextSnippetIcon sx={{ fill: "#f99d26", scale: "1.5" }} />
           <div className="flex flex-col pl-5">
@@ -138,7 +138,7 @@ export default function Manifest() {
             <LinearProgress variant="determinate" value={progress} />
           </div>
         </div>
-        <Divider flexItem sx={{ marginTop: 2, width: 500 }} />
+        <Divider flexItem sx={{ marginTop: 2, width: 550 }} />
       </div>
     </div>
   );

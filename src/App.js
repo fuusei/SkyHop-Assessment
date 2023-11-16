@@ -1,11 +1,13 @@
 import { Button } from "@mui/material";
-import Divider from "./components/Divider";
-import RadioGroup from "./components/RadioGroup";
-import Dropdown from "./components/Dropdown";
-import ExitButton from "./components/ExitButton";
-import Tolerance from "./components/Tolerance";
-import TestingCenters from "./components/TestingCenters";
-import Manifest from "./components/Manifest";
+import {
+  Divider,
+  Dropdown,
+  RadioGroup,
+  ExitButton,
+  Manifest,
+  Tolerance,
+  TestingCenters,
+} from "./components";
 
 function App() {
   return (
@@ -30,7 +32,7 @@ function App() {
                 defaultText="Select Import Name:"
                 fontWeight={700}
                 size="small"
-                width="500px"
+                width="550px"
               />
               <Divider />
               <div className="text-skyhop-blue font-bold mb-2">

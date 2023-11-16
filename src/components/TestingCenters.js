@@ -1,4 +1,4 @@
-import Dropdown from "./Dropdown";
+import { Dropdown } from ".";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 
 export default function TestingCenters({ info }) {
