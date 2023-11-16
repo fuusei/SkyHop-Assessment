@@ -7,7 +7,7 @@ module.exports = {
       "skyhop-orange": "#f99d26",
       success: "#4eb66b",
       white: "#ffffff",
-      divider: "#dcdde6",
+      gray: "#c2c1c6",
     },
     extend: {},
   },

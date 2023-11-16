@@ -4,13 +4,15 @@ import RadioGroup from "./components/RadioGroup";
 import Dropdown from "./components/Dropdown";
 import ExitButton from "./components/ExitButton";
 import Tolerance from "./components/Tolerance";
+import TestingCenters from "./components/TestingCenters";
+import Manifest from "./components/Manifest";
 
 function App() {
   return (
     <div className="flex min-h-screen min-w-screen justify-center">
-      <div className="bg-white shadow-xl rounded-[22px] min-h-full flex flex-col basis-3/4 my-[3%] p-10">
+      <div className="bg-white shadow-xl rounded-[22px] min-h-full flex flex-col basis-2/3 my-[3%] px-10 py-6">
         <div className="flex">
-          <ExitButton/>
+          <ExitButton />
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="flex justify-center text-skyhop-blue text-4xl font-bold">
@@ -21,19 +23,20 @@ function App() {
         {/* two column container */}
         <div className="flex flex-row mt-9 mx-10">
           {/* left column */}
-          <div className="basis-3/5 mx-2">
+          <div className="basis-3/5 mx-4">
             <div className="flex flex-col">
               <Dropdown
                 options={["Option 1", "Option 2", "Option 3", "Option 4"]}
                 defaultText="Select Import Name:"
-                size="small"
                 fontWeight={700}
-                width="600px"
+                size="small"
+                width="500px"
               />
               <Divider />
-              <div className="text-skyhop-blue font-bold">
+              <div className="text-skyhop-blue font-bold mb-2">
                 Select a manifest you'd like to import
               </div>
+              <Manifest />
               <Divider />
               <div className="text-skyhop-blue font-bold">
                 Elapse Data Checking:
@@ -43,6 +46,7 @@ function App() {
               <div className="text-skyhop-blue font-bold">
                 Tolerance Window:
               </div>
+              <Tolerance />
             </div>
           </div>
           {/* right column */}
@@ -60,6 +64,26 @@ function App() {
               <Divider />
               <div className="text-skyhop-blue font-bold">Client:</div>
               <RadioGroup options={["Single", "Multiple"]} />
+              <TestingCenters
+                info={[
+                  {
+                    text: "Testing Center 1",
+                    options: ["Wendy's", "McDonalds", "Burger King"],
+                  },
+                  {
+                    text: "Testing Center 2",
+                    options: ["Optometrist", "Pediatrician", "Pulmonologist"],
+                  },
+                  {
+                    text: "Testing Center 3",
+                    options: ["Water", "Soda", "Juice"],
+                  },
+                  {
+                    text: "Testing Center 4",
+                    options: ["Chest", "Triceps", "Back"],
+                  },
+                ]}
+              />
             </div>
           </div>
         </div>
@@ -73,11 +97,13 @@ function App() {
             sx={{
               textTransform: "none",
               paddingX: 7,
+              paddingY: 1,
               margin: 2,
               backgroundColor: "#1c3e6e",
               borderRadius: "8px",
               fontWeight: 550,
               width: 250,
+              height: 54,
             }}
           >
             Continue Import

@@ -5,13 +5,14 @@ import {
   MenuItem,
   OutlinedInput,
 } from "@mui/material";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from "react";
 
 export default function Dropdown({
   options,
   defaultText,
-  size,
   fontWeight,
+  size,
   width,
 }) {
   // designed for scalability
@@ -21,7 +22,7 @@ export default function Dropdown({
   };
 
   return (
-    <FormControl sx={{ paddingRight: 8, width: width }} size={size}>
+    <FormControl sx={{ width: width }} size={size}>
       <InputLabel
         sx={{
           color: "#1c3e6e",
@@ -38,8 +39,15 @@ export default function Dropdown({
       <Select
         value={value}
         label="Value"
+        IconComponent={KeyboardArrowDownIcon}
         onChange={handleChange}
-        input={<OutlinedInput label={defaultText} />}
+        input={
+          <OutlinedInput
+            label={defaultText}
+            margin="dense"
+            sx={{ padding: 4 }}
+          />
+        }
         sx={{
           "&.MuiOutlinedInput-root": { borderRadius: "10px" },
           ".MuiOutlinedInput-notchedOutline": {
@@ -54,7 +62,7 @@ export default function Dropdown({
         }}
       >
         {options.map((option, i) => (
-          <MenuItem value={i} sx={{ color: "#1c3e6e" }}>
+          <MenuItem value={i} key={i} sx={{ color: "#1c3e6e" }}>
             {option}
           </MenuItem>
         ))}
