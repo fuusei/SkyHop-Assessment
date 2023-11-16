@@ -6,6 +6,8 @@ import {
 } from "@mui/material";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import { linearProgressClasses } from "@mui/material/LinearProgress";
+import { useState, useEffect } from "react";
+import { PiFileTextFill } from "react-icons/pi";
 
 const LinearProgress = styled(MUILinearProgress)(() => ({
   height: 4,
@@ -20,15 +22,105 @@ const LinearProgress = styled(MUILinearProgress)(() => ({
   },
 }));
 
+let interval = undefined;
+
 export default function Manifest() {
+  const [fileName, setFileName] = useState("Enter a file...");
+  const [fileSize, setFileSize] = useState("0");
+  const [progress, setProgress] = useState(0);
+  const [startProgress, setStartProgress] = useState(false);
+
+  useEffect(() => {
+    if (startProgress) {
+      interval = setInterval(() => {
+        setProgress((oldProgress) => {
+          const diff = Math.random() * 20;
+          return Math.min(oldProgress + diff, 100);
+        });
+      }, 500);
+    } else {
+      clearInterval(interval);
+    }
+  }, [startProgress]);
+
+  useEffect(() => {
+    if (progress === 100) {
+      setStartProgress(false);
+      clearInterval(interval);
+    }
+  }, [progress]);
+
+  // const handleProgress = () => {
+  //   console.log(startProgress);
+  //   if (!startProgress) return;
+  //   const timer = setInterval(() => {
+  //     setProgress((oldProgress) => {
+  //       if (oldProgress === 100) {
+  //         return 0;
+  //       }
+  //       const diff = Math.random() * 10;
+  //       return Math.min(oldProgress + diff, 100);
+  //     });
+  //   }, 500);
+
+  //   return () => {
+  //     clearInterval(timer);
+  //     setStartProgress(false);
+  //   };
+  // };
+
+  const toReadableSize = (size) => {
+    var i = size === 0 ? 0 : Math.floor(Math.log(size) / Math.log(1024));
+    return (
+      (size / Math.pow(1024, i)).toFixed(2) * 1 +
+      ["B", "kB", "MB", "GB", "TB"][i]
+    );
+  };
+
+  const handleChange = (file) => {
+    setFileName(file.name);
+    setFileSize(toReadableSize(Number(file.size)));
+    setStartProgress(true);
+  };
+
+  const handleDrag = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    handleChange(e.dataTransfer.files[0]);
+  };
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col w-[500px] h-[250px] border-2 border-[#bfbfbf] rounded-lg">
-        <div className="mx-4 mt-4 border-2 border-dashed border-[#bfbfbf] basis-2/3 rounded-lg"></div>
+        <form
+          className="mx-4 mt-4 border-2 border-dashed border-[#bfbfbf] basis-2/3 rounded-lg"
+          onDragOver={handleDrag}
+          onDrop={handleDrop}
+        >
+          <input type="file" hidden id="input" />
+          <label
+            className="h-full w-full flex flex-col justify-center"
+            htmlFor="input"
+          >
+            <div className="flex justify-center mb-2">
+              <PiFileTextFill color="#f99d26" fontSize="1.8em" />
+            </div>
+            <div className="flex flex-row justify-center">
+              <div className="text-skyhop-blue font-semibold mr-1">
+                Drag & Drop Here or
+              </div>
+              <div className="text-skyhop-blue font-extrabold">Browse</div>
+            </div>
+          </label>
+        </form>
         <div className="basis-1/3 flex justify-center">
           <Button
             variant="contained"
             size="medium"
+            component="label"
             sx={{
               textTransform: "none",
               margin: 2,
@@ -41,6 +133,11 @@ export default function Manifest() {
             }}
           >
             Upload Manifest
+            <input
+              type="file"
+              hidden
+              onChange={(e) => handleChange(e.target.files[0])}
+            />
           </Button>
         </div>
       </div>
@@ -50,14 +147,12 @@ export default function Manifest() {
           <TextSnippetIcon sx={{ fill: "#f99d26", scale: "1.5" }} />
           <div className="flex flex-col pl-5">
             <div className="flex flex-row justify-between">
-                <div className="text-gray">
-                    Enter a file...
-                </div>
-                <div className="text-sm">
-                    {"0.0" + "MB"}
-                </div>
+              <div className="text-gray">{fileName}</div>
+              <div className="text-sm">
+                {fileSize === "0" ? fileSize + "MB" : fileSize}
+              </div>
             </div>
-            <LinearProgress />
+            <LinearProgress variant="determinate" value={progress} />
           </div>
         </div>
         <Divider flexItem sx={{ marginTop: 2, width: 500 }} />
