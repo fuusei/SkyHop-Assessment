@@ -22,7 +22,7 @@ const LinearProgress = styled(MUILinearProgress)(() => ({
   },
 }));
 
-let interval = undefined;
+let timer = undefined;
 
 export default function Manifest() {
   const [fileName, setFileName] = useState("Enter a file...");
@@ -32,42 +32,23 @@ export default function Manifest() {
 
   useEffect(() => {
     if (startProgress) {
-      interval = setInterval(() => {
-        setProgress((oldProgress) => {
-          const diff = Math.random() * 20;
-          return Math.min(oldProgress + diff, 100);
+      timer = setInterval(() => {
+        setProgress((prev) => {
+          const diff = Math.random() * 30;
+          return Math.min(prev + diff, 100);
         });
-      }, 500);
+      }, 1000);
     } else {
-      clearInterval(interval);
+      clearInterval(timer);
     }
   }, [startProgress]);
 
   useEffect(() => {
     if (progress === 100) {
       setStartProgress(false);
-      clearInterval(interval);
+      clearInterval(timer);
     }
   }, [progress]);
-
-  // const handleProgress = () => {
-  //   console.log(startProgress);
-  //   if (!startProgress) return;
-  //   const timer = setInterval(() => {
-  //     setProgress((oldProgress) => {
-  //       if (oldProgress === 100) {
-  //         return 0;
-  //       }
-  //       const diff = Math.random() * 10;
-  //       return Math.min(oldProgress + diff, 100);
-  //     });
-  //   }, 500);
-
-  //   return () => {
-  //     clearInterval(timer);
-  //     setStartProgress(false);
-  //   };
-  // };
 
   const toReadableSize = (size) => {
     var i = size === 0 ? 0 : Math.floor(Math.log(size) / Math.log(1024));
@@ -78,9 +59,11 @@ export default function Manifest() {
   };
 
   const handleChange = (file) => {
+    if (!file) return;
     setFileName(file.name);
     setFileSize(toReadableSize(Number(file.size)));
-    setStartProgress(true);
+    setProgress(0);
+    setTimeout(setStartProgress(true), 1000);
   };
 
   const handleDrag = (e) => {
